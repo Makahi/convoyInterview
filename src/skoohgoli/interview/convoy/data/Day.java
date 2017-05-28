@@ -1,7 +1,7 @@
 package skoohgoli.interview.convoy.data;
 
 /**
- * Created by Sacha on 5/25/17.
+ * @author Sacha
  */
 public enum Day {
     M("Monday"),

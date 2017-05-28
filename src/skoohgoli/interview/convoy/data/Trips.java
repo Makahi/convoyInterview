@@ -3,7 +3,7 @@ package skoohgoli.interview.convoy.data;
 import java.util.*;
 
 /**
- * Created by Sacha on 5/26/17.
+ * @author Sacha
  */
 public class Trips {
     private Map<Day, Map<Source, Stack<Destination>>> trips;
@@ -42,5 +42,9 @@ public class Trips {
 
     public Map<Source,Stack<Destination>> getTripsOnDay(Day day) {
         return trips.get(day);
+    }
+
+    public void removeSourceOnDay(Day day, Source source) {
+        trips.get(day).remove(source);
     }
 }

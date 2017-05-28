@@ -10,8 +10,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import static java.lang.System.exit;
+
 /**
- * Created by Sacha on 5/26/17.
+ * @author Sacha
  */
 public class Bundler {
 
@@ -22,16 +24,23 @@ public class Bundler {
     }
 
     /**
-     * O(n) runtime, as it traverses through the trip data set twice. The first traversal is to build the structure, the second is to travel through the "branches" to gather the paths
-     * O(n) space, as it stores the trips in memory.
+     * O(n) runtime, as it traverses through the trip data set twice.
+     *      The first traversal is to build the structure, the second is to travel through the branches to gather the paths.
+     *      We delete data in the "trips" structure after we have accessed it on our second pass, so that we won't have to traverse through it again.
+     * O(n) space, as it stores the trips in memory without any duplication due to the aforementioned cleanup.
      */
     public List<String> calculateBundledTrips() {
         List<String> bundledTrips = new ArrayList<>();
         for (Day day : Day.values()) {
-            Map<Source, Stack<Destination>> trips = this.trips.getTripsOnDay(day);
-            if (trips != null) {
-                for (Source source : trips.keySet()) {
-                    explore(day, source, new StringBuilder(), bundledTrips);
+            Map<Source, Stack<Destination>> tripsOnDay = this.trips.getTripsOnDay(day);
+            if (tripsOnDay != null) {
+                Iterator<Source> sourceIterator = tripsOnDay.keySet().iterator(); //Using an iterator here to avoid ConcurrentModificationExceptions
+                while (sourceIterator.hasNext()) {
+                    Source source = sourceIterator.next();
+                    Stack<Destination> destinations = trips.getTripsFromSourceOnDay(day, source);
+                    while (destinations != null && !destinations.isEmpty()) {
+                        explore(day, source, new StringBuilder(), bundledTrips);
+                    }
                 }
             }
         }
@@ -48,18 +57,12 @@ public class Bundler {
     private void explore(Day day, Source source, StringBuilder path, List<String> allPaths) {
         if (day != null && trips.dayExists(day) && trips.tripsFromSourceOnDayExists(day, source)) {
             Stack<Destination> destinations = trips.getTripsFromSourceOnDay(day, source);
-            boolean firstIteration = true;
-            while (destinations != null && !destinations.isEmpty()) {
+            if (destinations != null && !destinations.isEmpty()) {
                 Destination dest = destinations.pop();
-                if (firstIteration) {
-                    path.append(dest.getId()).append(" ");
-                    firstIteration = false;
-                    explore(day.next(), new Source(dest.getDestination()), path, allPaths);
-                } else {
-                    StringBuilder newPath = new StringBuilder();
-                    newPath.append(dest.getId()).append(" ");
-                    explore(day.next(), new Source(dest.getDestination()), newPath, allPaths);
-                }
+                path.append(dest.getId()).append(" ");
+                explore(day.next(), new Source(dest.getDestination()), path, allPaths);
+            } else {
+                trips.removeSourceOnDay(day, source);
             }
         } else {
             String finalPath = path.toString();
@@ -76,7 +79,7 @@ public class Bundler {
             String line = br.readLine();
             while (line != null) {
                 line = line.toUpperCase();
-                //ignore commented lines
+                //Treat lines starting with '#' as commented lines, and ignore
                 if (line.charAt(0) != '#') {
                     String[] inputs = line.split(" ");
                     if (inputs.length != 4 || inputs[0].isEmpty() || inputs[1].isEmpty() || inputs[2].isEmpty() || inputs[3].isEmpty()) {
@@ -98,6 +101,12 @@ public class Bundler {
 
 
     public static void main(String[] args) throws Exception {
+        if (args == null || args.length != 1) {
+            System.out.println("Error, proper usage: ./bundler.sh 'inputFile'");
+            System.out.println("Exiting...");
+            exit(1);
+        }
+
         Bundler bundler = new Bundler();
         bundler.loadTripsFromFile(args[0]);
 

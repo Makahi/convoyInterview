@@ -3,7 +3,7 @@ package skoohgoli.interview.convoy.data;
 import java.util.Objects;
 
 /**
- * Created by Sacha on 5/26/17.
+ * @author Sacha
  */
 public class Destination {
     private final String id;
