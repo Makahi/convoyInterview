@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Title: tripBundler
+Implementation-Version: 0.1.0
+Created-By: Sacha Koohgoli
+Main-Class: skoohgoli.interview.convoy.Bundler
+

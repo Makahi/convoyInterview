@@ -1,0 +1,5 @@
+# Requests a day of the week that doesn't exist
+# Expected error:
+# IllegalArgumentException: No enum constant skoohgoli.interview.convoy.data.Day.S
+1 SEATTLE PORTLAND F
+2 PORTLAND SAN_FRANCISCO S
