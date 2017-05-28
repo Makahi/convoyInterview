@@ -7,8 +7,8 @@ Write a java application that takes in a input file denoting trips, and bundles 
 Print out these bundles.
 
 <h4>Interface:</h4>
-##### <i>./bundler.sh path_to_input_file</i>
-- path_to_input_file is mandatory
+<i>./bundler.sh path_to_input_file</i>
+<ul><li>path_to_input_file is mandatory</li></ul>
 
 <h4>Input file</h4>
 Each line in the file represents one shipment, and looks like:
