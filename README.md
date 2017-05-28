@@ -24,7 +24,7 @@ Lines beginning with a '#' are considered comments and will not be processed
 2) Run the bundler with <b><i>./bundler.sh path_to_input_file</i></b>
 
 <h4>Ex:</h4>
-```
+<pre>
 Eris:convoyInterview Sacha$ ./bundler.sh "tst/resources/OneBranchTest"
 1 3 44 22 99
 2
@@ -32,7 +32,7 @@ Eris:convoyInterview Sacha$ ./bundler.sh "tst/resources/MultipleBranchesTest"
 1 3 5
 4
 2
-```
+</pre>
 
 
 <h4>To build source code if jar not present:</h4>
