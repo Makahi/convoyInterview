@@ -20,9 +20,10 @@ Lines beginning with a '#' are considered comments and will not be processed
 
 
 <h4>How to run:</h4>
-1) Make sure that you have Java 8 or later installed on your computer (if not, download from https://java.com/en/download/)
-2) Run the bundler with <b><i>./bundler.sh path_to_input_file</i></b>
-
+<ol>
+<li>Make sure that you have Java 8 or later installed on your computer (if not, download from https://java.com/en/download/)</li>
+<li>Run the bundler with <b><i>./bundler.sh path_to_input_file</i></b></li>
+</ol>
 <h4>Ex:</h4>
 <pre>
 Eris:convoyInterview Sacha$ ./bundler.sh "tst/resources/OneBranchTest"
@@ -36,6 +37,8 @@ Eris:convoyInterview Sacha$ ./bundler.sh "tst/resources/MultipleBranchesTest"
 
 
 <h4>To build source code if jar not present:</h4>
-1) Install gradle if not already installed (https://gradle.org/)
-2) Pull down this git repository and navigate to its root directory
-3) Run <b><i>gradle clean build</i></b> to build the code into a jar file
+<ol>
+<li>Install gradle if not already installed (https://gradle.org/)</li>
+<li>Pull down this git repository and navigate to its root directory</li>
+<li>Run <b><i>gradle clean build</i></b> to build the code into a jar file</li>
+</ol>
