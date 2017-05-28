@@ -49,7 +49,7 @@ public class Bundler {
     }
 
     /**
-     * Recursive implementation.
+     * Recursive implementation. The recursion is capped to at most 5 calls (if the base recursive call started on Monday), since the recursion automatically ends on the day after Friday no matter what.
      *    If done iteratively would be more memory efficient (wouldn't have to worry about the function call stack memory),
      *    but the could would not be as easy to read. For an interview question, I prioritized readability over memory usage.
 

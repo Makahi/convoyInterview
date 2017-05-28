@@ -1,0 +1,6 @@
+# Makes sure that friday trips don't loop into mondays.
+# Expected output:
+# 2
+# 1
+1 SEATTLE PORTLAND F
+2 PORTLAND SEATTLE M
