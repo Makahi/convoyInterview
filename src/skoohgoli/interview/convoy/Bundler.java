@@ -21,6 +21,10 @@ public class Bundler {
         this.trips = new Trips();
     }
 
+    /**
+     * O(n) runtime, as it traverses through the trip data set twice. The first traversal is to build the structure, the second is to travel through the "branches" to gather the paths
+     * O(n) space, as it stores the trips in memory.
+     */
     public List<String> calculateBundledTrips() {
         List<String> bundledTrips = new ArrayList<>();
         for (Day day : Day.values()) {
@@ -35,7 +39,12 @@ public class Bundler {
         return bundledTrips;
     }
 
-    //recursive implementation
+    /**
+     * Recursive implementation.
+     *    If done iteratively would be more memory efficient (wouldn't have to worry about the function call stack memory),
+     *    but the could would not be as easy to read. For an interview question, I prioritized readability over memory usage.
+
+     */
     private void explore(Day day, Source source, StringBuilder path, List<String> allPaths) {
         if (day != null && trips.dayExists(day) && trips.tripsFromSourceOnDayExists(day, source)) {
             Stack<Destination> destinations = trips.getTripsFromSourceOnDay(day, source);
@@ -90,9 +99,8 @@ public class Bundler {
 
     public static void main(String[] args) throws Exception {
         Bundler bundler = new Bundler();
-        //bundler.loadTripsFromFile(args[0]);
+        bundler.loadTripsFromFile(args[0]);
 
-        bundler.loadTripsFromFile("tst/resources/ParallelTripsTest");
         List<String> bundledTrips = bundler.calculateBundledTrips();
 
         for (String trip : bundledTrips) {
